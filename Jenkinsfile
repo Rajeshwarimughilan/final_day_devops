@@ -4,7 +4,7 @@ pipeline{
         stage('source code') {
             steps {
                 echo 'Cloning...'
-                   git branch: 'main', url: 'https://github.com/PV-Sudarsan/task-jenkins.git'
+                   git branch: 'main', url: 'https://github.com/Rajeshwarimughilan/final_day_devops.git'
 
             }
         }
