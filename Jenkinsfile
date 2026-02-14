@@ -1,28 +1,19 @@
-pipeline {
+pipeline{
     agent any
-
     stages {
-
-        stage('Source Code') {
+        stage('source code') {
             steps {
                 echo 'Cloning...'
-                git branch: 'main', url: 'https://github.com/Marvel-k23/jenkins-nginix.git'
+                   git branch: 'main', url: 'https://github.com/PV-Sudarsan/task-jenkins.git'
+
             }
         }
-
-        stage('Build Docker Image') {
+        stage('terraform') {
             steps {
-                echo 'Building Docker Image...'
-                sh 'docker build -t job-11 .'
-            }
-        }
-
-        stage('Deploy Container') {
-            steps {
-                echo 'Deploying Container...'
-                
-                
-                sh 'docker run -d -p 80:80 --name job-11 job-11'
+                echo 'Deploying...'
+                sh 'terraform init'
+                sh 'terraform plan -var="ami=ami-0abc1234def567890" '
+                sh 'terraform apply -var="ami=ami-0abc1234def567890" -auto-approve'
             }
         }
     }

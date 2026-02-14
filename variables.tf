@@ -1,10 +1,10 @@
 variable "aws_region" {
   type    = string
-  default = "us-east-1"
+  default = "eu-north-1c"
 }
 variable "instance_type" {
   type    = string
-  default = "t3.micro"
+  default = "t3.small"
 }
 variable "ami_id" {
   type = string
@@ -16,7 +16,7 @@ variable "ami_id" {
 }
 variable "existing_key_pair_name" {
   type    = string
-  default = "devops"
+  default = "finalkey"
 }
 variable "allowed_ssh_cidr" {
   type    = string
