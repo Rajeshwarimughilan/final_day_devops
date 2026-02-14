@@ -11,9 +11,13 @@ pipeline{
         stage('terraform') {
             steps {
                 echo 'Deploying...'
-                sh 'terraform init'
-                sh 'terraform plan -var="ami_id=ami-073130f74f5ffb161" -var="instance_type=t3.small"'
-                sh 'terraform apply -var="ami_id=ami-073130f74f5ffb161" -var="instance_type=t3.small" -auto-approve'
+                withCredentials([
+                    usernamePassword(credentialsId: 'aws-credentials', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')
+                ]) {
+                    sh 'terraform init'
+                    sh 'terraform plan -var="ami_id=ami-073130f74f5ffb161" -var="instance_type=t3.small"'
+                    sh 'terraform apply -var="ami_id=ami-073130f74f5ffb161" -var="instance_type=t3.small" -auto-approve'
+                }
             }
         }
     }
